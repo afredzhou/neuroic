@@ -14,7 +14,6 @@ void wifisetup() {
   WiFiManager wifiManager;
   // 尝试连接保存的WiFi网络，如果没有保存的网络，则启动一键配网界面，并设置热点名称
   bool connected = wifiManager.autoConnect("myESP32");
-
   if (connected) {
     Serial.println("Connected to WiFi");
     server.begin();
