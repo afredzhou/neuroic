@@ -1,4 +1,4 @@
-
+#include <Arduino.h>
 #include <BLEDevice.h>
 #include <BLEServer.h>
 #include <BLEUtils.h>
@@ -80,5 +80,5 @@ void ble() {
         // do stuff here on connecting
         oldDeviceConnected = deviceConnected;
     }
-  }
+  
 }
