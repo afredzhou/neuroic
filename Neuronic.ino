@@ -1,40 +1,45 @@
 #include <BLEDevice.h>
-#include <BLEAdvertising.h> // 引入BLEAdvertising库
-#include "setup.h"
-#include "loop.h"
+#include <BLEServer.h>
+#include <BLEAdvertising.h>
 
 #define UUID 1836475137
 
 void setup() {
   Serial.begin(115200);
-  
+
+  // 初始化WiFi和其他设置
   wifisetup();
-  
+
+  // 初始化BLE设备
   BLEDevice::init("E32");
+
+  // 创建BLE服务器
   BLEServer *pServer = BLEDevice::createServer();
+  
+  // 创建BLE服务
   BLEService *pService = pServer->createService(BLEUUID((uint16_t)UUID));
+
+  // 创建BLE特征
   BLECharacteristic *pCharacteristic = pService->createCharacteristic(
                                        BLEUUID((uint16_t)(UUID + 1)),
                                        BLECharacteristic::PROPERTY_READ |
                                        BLECharacteristic::PROPERTY_WRITE
                                        );
-  pService->start();
   
-  // 添加以下代码来设置广播数据
-  BLEAdvertising *pAdvertising = BLEDevice::getAdvertising();
+  // 启动BLE服务
+  pService->start();
+
+  // 启动BLE广播
+  BLEAdvertising *pAdvertising = pServer->getAdvertising();
   pAdvertising->addServiceUUID(pService->getUUID());
   pAdvertising->setScanResponse(true);
-  pAdvertising->setMinInterval(0x06); // 设置广播最小间隔
-  pAdvertising->setMaxInterval(0x08); // 设置广播最大间隔
-  
   pAdvertising->start();
-  
-  pServer->startAdvertising();
 
   Serial.println("Started advertising");
 }
 
 void loop() {
+  // 处理其他任务
   wifi();
   delay(1000);
 }
