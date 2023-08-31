@@ -2,4 +2,5 @@
 #define SETUP_H_
 
 void wifisetup();
+void blesetup();
 #endif
