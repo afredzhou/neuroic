@@ -3,4 +3,5 @@
 
 void wifisetup();
 void blesetup();
+void awssetup();
 #endif
