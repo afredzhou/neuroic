@@ -24,9 +24,7 @@
 #define PIN 26
 #define clean_session false
 #define MAX_LED 16
-#define ADD true
-
-#define SUB false
+extern bool connected;
 int f =0;
 uint8_t count;
 unsigned long period;
@@ -37,7 +35,6 @@ Adafruit_NeoPixel strip = Adafruit_NeoPixel(MAX_LED, PIN, NEO_RGB + NEO_KHZ800);
 #define AWS_IOT_PUBLISH_TOPIC "esp32/pub"
 #define AWS_IOT_SUBSCRIBE_TOPIC "esp32/sub"
 
-WiFiClientSecure net = WiFiClientSecure();
 MQTTClient client = MQTTClient(256);
 // led blink
 void blinkled(uint8_t a)
