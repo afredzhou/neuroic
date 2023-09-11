@@ -3,14 +3,14 @@
 #include <Arduino.h>
 void setup() {
   Serial.begin(115200);
-  blesetup();
+  // blesetup();
   PCA9685setup();
-  awssetup();
+  // awssetup();
 }
 
 void loop() {
-  ble();
+  // ble();
   PCA9685();
-  aws();
+  // aws();
   delay(1000);
 }
