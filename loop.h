@@ -3,5 +3,6 @@
 void wifi();
 void aws();
 void ble();
+void wifi();
 void PCA9685();
 #endif
