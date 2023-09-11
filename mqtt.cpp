@@ -18,6 +18,7 @@
 #include <MQTTClient.h>
 #include <ArduinoJson.h>
 #include "WiFi.h"
+#include "setup.h"
 #include <Adafruit_NeoPixel.h>
 #define QOS         2
 #define PIN 26
@@ -94,8 +95,6 @@ void messageHandler(String &topic, String &payload)
 
 void connectAWS()
 {
-  WiFi.mode(WIFI_STA);
-  WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
    delay(100);
   Serial.println("Connecting to Wi-Fi");
 
@@ -103,6 +102,7 @@ void connectAWS()
   {
     delay(100);
     Serial.print(".");
+    wifisetup();
   }
 
   // Configure WiFiClientSecure to use the AWS IoT device credentials

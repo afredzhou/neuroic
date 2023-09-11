@@ -16,25 +16,22 @@ class MyServerCallbacks: public BLEServerCallbacks {
       deviceConnected = true;
     };
 
-    void onDisconnect(BLEServer* pServer) {
-      deviceConnected = false;
+     void onDisconnect(BLEServer* pServer) {
+        deviceConnected = false;
+        pServer->startAdvertising(); // 重新启动广播
     }
 };
 
 
 
 void blesetup(){
-
-
  // 初始化BLE设备
    BLEDevice::init("ESP32");
   // Create the BLE Server
   pServer = BLEDevice::createServer();
   pServer->setCallbacks(new MyServerCallbacks());
-
   // Create the BLE Service
    BLEService *pService = pServer->createService(SERVICE_UUID);
-
   // Create a BLE Characteristic
   pCharacteristic = pService->createCharacteristic(
                      CHARACTERISTIC_UUID,
@@ -43,14 +40,10 @@ void blesetup(){
                       BLECharacteristic::PROPERTY_NOTIFY |
                       BLECharacteristic::PROPERTY_INDICATE
                     );
-
-  // https://www.bluetooth.com/specifications/gatt/viewer?attributeXmlFile=org.bluetooth.descriptor.gatt.client_characteristic_configuration.xml
   // Create a BLE Descriptor
   pCharacteristic->addDescriptor(new BLE2902());
-
   // Start the service
   pService->start();
-
   // Start advertising
   BLEAdvertising *pAdvertising = BLEDevice::getAdvertising();
   pAdvertising->addServiceUUID(SERVICE_UUID);

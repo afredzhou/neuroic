@@ -3,12 +3,15 @@
 #include <Arduino.h>
 void setup() {
   Serial.begin(115200);
-  blesetup();
-  wifisetup();
+  // blesetup();
+  PCA9685setup();
+  // awssetup();
 
 }
 
 void loop() {
-  wifi();
+  // ble();
+  PCA9685();
+  // aws();
   delay(1000);
 }

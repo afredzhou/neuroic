@@ -1,8 +1,7 @@
 #include <WiFi.h>
 #include <WiFiManager.h>
-
+bool connected =false;
 WiFiServer server(80);
-
 void handleReq(WiFiClient c) {
   c.println("HTTP/1.1 200 OK");
   c.println("Content-Type: text/plain");
@@ -25,10 +24,4 @@ void wifisetup() {
 }
 
 void wifi() {
-  WiFiClient c = server.available();
-
-  if (c) {
-    handleReq(c);
-    c.stop();
-  }
 }
