@@ -4,5 +4,6 @@
 void wifisetup();
 void blesetup();
 void awssetup();
-void PCA9685setup();
+void PCA9635setup();
+void ledSetup();
 #endif
